@@ -8,6 +8,7 @@ import (
 
 type DriverSelector struct{}
 
+// Select from an order an array of driverIDs or an error.
 func (d DriverSelector) Select(order Order) ([]uint, error) {
 	time.Sleep(time.Duration(rand.Intn(5)) * time.Second)
 	if rand.Float32() < 0.5 {
