@@ -7,7 +7,7 @@ import (
 	"testing"
 )
 
-var update = flag.Bool("test.update", false, "update golden file")
+var update = flag.Bool("test.golden.update", false, "update golden file")
 
 // Get returns the golden file content. If the `test.update` is specified, it updates the
 // file with the current output and returns it.

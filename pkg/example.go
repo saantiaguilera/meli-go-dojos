@@ -1,8 +1,11 @@
 package pkg
 
 import (
+	"errors"
+	"fmt"
 	"sync"
 
+	"github.com/gin-gonic/gin"
 	"github.com/mercadolibre/fury_shipping-dx-dojo/pkg/external"
 )
 
@@ -61,17 +64,18 @@ func NewOrder(orderId uint) {
 	wg.Wait()
 
 	wg.Add(2)
-	var route external.Route
+	//	var route external.Route
 	go func(wg *sync.WaitGroup) {
-		route = createRoute(order)
+		_ = createRoute(order)
 		wg.Done()
 	}(&wg)
 
-	var drivers []external.Driver
+	//var drivers []external.Driver
 	var err error
 	go func(wg *sync.WaitGroup) {
-		driversId, err = getDrivers(order)
-		var ds []external.Driver = getDriversById(driversId)
+		driversId, e := getDrivers(order)
+		_ = getDriversById(driversId)
+		err = e
 		wg.Done()
 	}(&wg)
 	wg.Wait()
@@ -80,6 +84,10 @@ func NewOrder(orderId uint) {
 		tracker.Track("Error while getting drivers", err)
 		return
 	}
+}
+
+func Println(msg string) {
+	fmt.Println(msg)
 }
 
 func getDriversById(ids []uint) []external.Driver {
@@ -139,4 +147,41 @@ func trackOrder(orderId uint) {
 	tracker := external.NewMetricTracker()
 
 	_ = tracker.Track("order", orderId)
+}
+
+type User struct {
+	ID int
+}
+type UserService interface {
+	GetUsers() []User
+}
+
+type GetUserUseCase struct {
+	userService UserService
+}
+
+var ErrorNotFound = errors.New("no user found")
+
+func (g GetUserUseCase) GetUser(userId int) (User, error) {
+	users := g.userService.GetUsers()
+
+	for _, u := range users {
+		if u.ID == userId {
+			return u, nil
+		}
+	}
+	return User{}, ErrorNotFound
+}
+
+func NewGetUserUseCase(u UserService) GetUserUseCase {
+	return GetUserUseCase{
+		userService: u,
+	}
+}
+
+func PostUser(c *gin.Context) {
+	c.JSON(200, gin.H{
+		"user_id": 200,
+		"name":    "the-it-crowd",
+	})
 }
