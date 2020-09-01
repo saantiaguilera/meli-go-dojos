@@ -1,4 +1,4 @@
-module github.com/mercadolibre/fury_shipping-dx-dojo
+module github.com/mercadolibre/fury_shipping-dx-dojo/go
 
 go 1.14
 

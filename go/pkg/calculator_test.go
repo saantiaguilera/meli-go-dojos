@@ -1,9 +1,10 @@
 package pkg_test
 
 import (
-	"github.com/mercadolibre/fury_shipping-dx-dojo/pkg"
-	"github.com/stretchr/testify/assert"
 	"testing"
+
+	"github.com/mercadolibre/fury_shipping-dx-dojo/go/pkg"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestBasicCalculator_GivenTwoInts_WhenSumming_ThenCorrectSumIsReturned(t *testing.T) {

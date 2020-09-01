@@ -3,7 +3,7 @@ package pkg_test
 import (
 	"testing"
 
-	"github.com/mercadolibre/fury_shipping-dx-dojo/pkg"
+	"github.com/mercadolibre/fury_shipping-dx-dojo/go/pkg"
 	"github.com/stretchr/testify/assert"
 )
 

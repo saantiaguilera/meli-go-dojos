@@ -2,9 +2,10 @@ package pkg_test
 
 import (
 	"errors"
-	"github.com/mercadolibre/fury_shipping-dx-dojo/pkg"
-	"github.com/stretchr/testify/assert"
 	"testing"
+
+	"github.com/mercadolibre/fury_shipping-dx-dojo/go/pkg"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestHacerCortado(t *testing.T) {
@@ -23,7 +24,7 @@ func TestHacerCortado(t *testing.T) {
 
 	assert.Nil(t, err)
 	assert.Equal(t, pkg.Bebida{
-		Cafe: 250,
+		Cafe:  250,
 		Leche: 150,
 	}, b)
 }
