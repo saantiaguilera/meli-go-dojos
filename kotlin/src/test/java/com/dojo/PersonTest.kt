@@ -3,6 +3,7 @@ package com.dojo
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
+import com.dojo.Heladeria
 import com.dojo.Person
 
 class PersonTest {
